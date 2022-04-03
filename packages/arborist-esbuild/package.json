@@ -1,0 +1,9 @@
+{
+  "name": "@quackware/npm-arborist-esbuild",
+  "devDependencies": {
+    "@quackware/types-arborist": "*"
+  },
+  "dependencies": {
+    "@npmcli/arborist": "^5.0.4"
+  }
+}

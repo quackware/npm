@@ -1,0 +1,13 @@
+{
+  "name": "@quackware/npm",
+  "version": "0.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": {
+    "url": "https://github.com/quackware/npm"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23"
+  }
+}
