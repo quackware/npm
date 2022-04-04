@@ -2,6 +2,7 @@
   "importMap": "./import-map.json",
 
   "tasks": {
-    "list": "deno run -A --config=./deno.jsonc ./packages/all-the-packages/src/list.ts"
+    "list": "deno run -A --config=./deno.jsonc ./packages/all-the-packages/src/list.ts",
+    "hydrate": "deno run -A --config=./deno.jsonc ./packages/all-the-packages/src/hydrate.ts"
   }
 }

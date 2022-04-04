@@ -1,0 +1,33 @@
+name: list
+
+on:
+  workflow_dispatch:
+    inputs:
+      artifact:
+        type: string
+        description: Artifact
+        required: true
+        default: artifact
+
+concurrency: ci-${{ github.ref }}
+
+jobs:
+  hydrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ github.event.inputs.artifact }}
+          path: /tmp/${{ github.event.inputs.artifact }}
+
+      - name: Get Metadata
+        run: |
+          echo "RECORD_COUNT=$(wc -l ./dist/out.json)" | cut -f1,2 -d" " >> GITHUB_ENV
+
+      - name: Run Hydrate
+        run: |
+          deno task hydrate /tmp/${{ github.event.inputs.artifact }}

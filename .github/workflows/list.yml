@@ -1,0 +1,25 @@
+name: list
+
+on:
+  workflow_dispatch:
+
+concurrency: ci-${{ github.ref }}
+
+jobs:
+  list:
+    name: list
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+
+      - name: Run Lister
+        run: |
+          deno task list /tmp/package-names.json
+
+      - name: Archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: package-names.json
+          path: /tmp/package-names.json
