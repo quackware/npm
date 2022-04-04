@@ -1,0 +1,38 @@
+on:
+  workflow_dispatch:
+    inputs:
+      startIndex:
+        type: string
+        description: Starting index
+        required: false
+        default: "0"
+      limit:
+        description: Limit
+        type: string
+        required: false
+
+concurrency: ci-${{ github.ref }}
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+
+  list:
+    name: List
+    runs-on: ubuntu-latest
+    needs: [setup]
+
+    steps:
+      - name: Run Lister
+        run: |
+          deno task list /tmp/out.json
+
+      - name: Archive
+        uses: actions/upload-artifact@v3
+        with:
+          path: /tmp/out.json

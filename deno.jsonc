@@ -1,3 +1,7 @@
 {
-  "importMap": "./import-map.json"
+  "importMap": "./import-map.json",
+
+  "tasks": {
+    "list": "deno run -A --config=./deno.jsonc ./packages/all-the-packages/src/list.ts"
+  }
 }
