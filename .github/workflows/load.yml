@@ -1,0 +1,35 @@
+name: Load
+
+on:
+  workflow_dispatch:
+    inputs:
+      origin:
+        type: string
+        description: Origin
+        required: true
+      config:
+        type: string
+        description: Config
+        required: true
+
+concurrency: ci-${{ github.ref }}
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    name: Load
+
+    env:
+      LOAD_ORIGIN: ${{ github.event.inputs.origin }}
+      LOAD_CONFIG: ${{ github.event.inputs.config }}
+
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+
+      - name: Run Load
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          deno task load $LOAD_ORIGIN $LOAD_CONFIG

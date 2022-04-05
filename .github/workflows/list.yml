@@ -2,6 +2,16 @@ name: list
 
 on:
   workflow_dispatch:
+    inputs:
+      origin:
+        type: string
+        description: Origin
+        required: true
+      destination:
+        type: string
+        description: Destination
+        required: true
+        default: dest
 
 concurrency: ci-${{ github.ref }}
 
@@ -10,16 +20,23 @@ jobs:
     name: list
     runs-on: ubuntu-latest
 
+    env:
+      LIST_ORIGIN: ${{ github.event.inputs.origin}}
+      LIST_DESTINATION: ${{ github.event.inputs.destination}}
+
     steps:
       - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
 
-      - name: Run Lister
+      - name: Run List
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          deno task list /tmp/package-names.json
+          deno task list $LIST_ORIGIN $LIST_DESTINATION
+
 
       - name: Archive
         uses: actions/upload-artifact@v3
         with:
-          name: package-names.json
-          path: /tmp/package-names.json
+          name: artifact-${{env.GITHUB_RUN_ID}}.json
+          path: $LIST_DESTINATION
