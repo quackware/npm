@@ -11,7 +11,7 @@ on:
         type: string
         description: Destination
         required: true
-        default: dest
+        default: dist
 
 concurrency: ci-${{ github.ref }}
 
@@ -34,9 +34,8 @@ jobs:
         run: |
           deno task list $LIST_ORIGIN $LIST_DESTINATION
 
-
       - name: Archive
         uses: actions/upload-artifact@v3
         with:
           name: artifact-${{env.GITHUB_RUN_ID}}.json
-          path: $LIST_DESTINATION
+          path: ${{ env.LIST_DESTINATION }}
