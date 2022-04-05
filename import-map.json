@@ -1,5 +1,5 @@
 {
   "imports": {
-    "https://curtis.land/core/debug.ts": "https://gist.githubusercontent.com/curtislarson/82a085dfb5ad340747626bf8c27f4c2b/raw/cf7eec8c1e1927b05fc1e17c8a8bca8f2a686d11/debug.ts"
+    "https://curtis.land/deno/core/debug.ts": "https://gist.githubusercontent.com/curtislarson/82a085dfb5ad340747626bf8c27f4c2b/raw/cf7eec8c1e1927b05fc1e17c8a8bca8f2a686d11/debug.ts"
   }
 }

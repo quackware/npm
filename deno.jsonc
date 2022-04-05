@@ -2,7 +2,19 @@
   "importMap": "./import-map.json",
 
   "tasks": {
-    "list": "deno run -A --config=./deno.jsonc ./packages/all-the-packages/src/list.ts",
-    "hydrate": "deno run -A --config=./deno.jsonc ./packages/all-the-packages/src/hydrate.ts"
+    "ci": "deno fmt && deno test -A",
+
+    "list": "deno run -A ./packages/registry/src/list.ts",
+    "load": "deno run -A ./packages/registry/src/load.ts"
+  },
+
+  "fmt": {
+    "files": {
+      "exclude": [
+        "./node_modules",
+        "./dist",
+        "./packages/graph-arborist/src/bundle"
+      ]
+    }
   }
 }

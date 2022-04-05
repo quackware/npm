@@ -1,0 +1,5 @@
+{
+  "name": "@quackware/npm-types",
+  "version": "0.0.0",
+  "types": "./src/index.ts"
+}

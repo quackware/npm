@@ -18,5 +18,9 @@ export async function list(origin: string, destination: string) {
 
 if (import.meta.main) {
   const [origin, destination] = Deno.args;
+  if (!origin || !destination) {
+    console.error(`USAGE: ${Deno.mainModule} [origin] [destination]`);
+    Deno.exit(1);
+  }
   list(origin, destination).catch(console.error);
 }

@@ -1,5 +1,10 @@
 import { Arborist as ArboristBundle } from "./bundle/arborist.bundle.js";
-import type { ArboristImpl, GraphOptions, Node, Packument } from "./bundle/types.ts";
+import type {
+  ArboristImpl,
+  GraphOptions,
+  Node,
+  Packument,
+} from "./bundle/types.ts";
 
 export type { Node };
 
