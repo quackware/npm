@@ -20,22 +20,23 @@ jobs:
     name: list
     runs-on: ubuntu-latest
 
-    env:
-      LIST_ORIGIN: ${{ github.event.inputs.origin}}
-      LIST_DESTINATION: ${{ github.event.inputs.destination}}
-
     steps:
       - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
+
+      - name: Mask
+      - run: |
+          echo "::add-mask::${{ github.event.inputs.origin}}"
+          echo "::add-mask::${{ github.event.inputs.destination}}"
 
       - name: Run List
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          deno task list $LIST_ORIGIN $LIST_DESTINATION
+          deno task list ${{ github.event.inputs.origin}} ${{ github.event.inputs.destination}}
 
       - name: Archive
         uses: actions/upload-artifact@v3
         with:
           name: artifact-${{github.run_id}}.json
-          path: ${{ env.LIST_DESTINATION }}
+          path: ${{ github.event.inputs.destination}}
