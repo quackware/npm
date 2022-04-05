@@ -37,5 +37,5 @@ jobs:
       - name: Archive
         uses: actions/upload-artifact@v3
         with:
-          name: artifact-${{env.GITHUB_RUN_ID}}.json
+          name: artifact-${{github.run_id}}.json
           path: ${{ env.LIST_DESTINATION }}
